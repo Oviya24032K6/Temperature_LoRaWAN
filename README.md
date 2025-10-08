@@ -1,4 +1,6 @@
 # INTERFACING TEMPERATURE SENSOR WITH IOT CONTROLLER AND UPLOADING DATA TO THE CLOUD VIA LORAWAN
+### NAME : OVIYA P
+### REG NO : 212223110033
 
 # AIM:
 To upload the temperature sensor value in the Things mate using Arduino controller.
@@ -79,10 +81,90 @@ Update rate: 1 Hz (one reading per second)</br>
 ![DHT11-Sensor](https://github.com/user-attachments/assets/69e4670d-6116-4cab-b905-941169d913a5)
 
 # PROGRAM:
+```
+#include "ThingSpeak.h"
+#include <WiFi.h>
+
+char ssid[] = "shashu";//your wifi ssid//
+char pass[] = "SHASHWATH";//your wifi pass//
+
+#define ldr_pin 34
+#define led_pin 2
+int ldrValue = 0;
+int lightPercentage = 0;
+const int darkValue = 4095;
+const int brightValue = 0;
+WiFiClient client;
+
+unsigned long myChannelField =3104401;
+const int lightPercentageField = 1;
+const char* myWriteAPIKey = "WEFEQHEXUB7IVICW";
+
+
+
+void setup() {
+  Serial.begin(115200);
+  ThingSpeak.begin(client);
+  WiFi.mode(WIFI_STA);
+  pinMode(ldr_pin,INPUT);
+  pinMode(led_pin,OUTPUT);
+
+
+}
+
+void loop() {
+  ldrValue= analogRead(ldr_pin);
+
+  lightPercentage= map(ldrValue,darkValue,brightValue,0,100);
+
+  lightPercentage=constrain(lightPercentage,0,100);
+
+  
+
+  if(WiFi.status() != WL_CONNECTED)
+  {
+    Serial.print("Attempting to connect SSID: ");
+    Serial.print(ssid);
+    while(WiFi.status() != WL_CONNECTED)
+    {
+      WiFi.begin(ssid,pass);
+      Serial.print(".");
+      delay(5000);
+    }
+    Serial.println("\nConnected.");
+  }
+  Serial.println("Intensity");
+  Serial.println(lightPercentage);
+  Serial.println("%");
+  if(lightPercentage<50)
+  {
+    digitalWrite(led_pin,HIGH);
+  }
+  else
+  {
+    digitalWrite(led_pin,LOW);
+  }
+  delay(5000);
+
+//ThingSpeak.setField(lightPercentageField,lightPercentage);
+//ThingSpeak.writeFields(myChannelField,myWriteAPIKey);
+
+
+ThingSpeak.writeField(myChannelField, lightPercentageField, lightPercentage,myWriteAPIKey);
+delay(5000);
+
+
+}
+```
+
 
 # CIRCUIT DIAGRAM:
+<img width="379" height="464" alt="image" src="https://github.com/user-attachments/assets/70065734-60d9-418a-87f9-842ec4823671" />
+
+
 
 # OUTPUT:
+<img width="1258" height="614" alt="image" src="https://github.com/user-attachments/assets/b92f53ac-80ba-4b6f-a58b-322004ee7d2b" />
 
 # RESULT:
 
