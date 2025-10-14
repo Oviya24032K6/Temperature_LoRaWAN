@@ -144,12 +144,14 @@ delay(5000);
 ```
 
 # CIRCUIT DIAGRAM:
-<img width="379" height="464" alt="image" src="https://github.com/user-attachments/assets/70065734-60d9-418a-87f9-842ec4823671" />
+![WhatsApp Image 2025-10-14 at 10 48 33_8ffdb398](https://github.com/user-attachments/assets/fb196492-2306-4b0a-86d2-149c4cae9c93)
+
 
 
 
 # OUTPUT:
-<img width="1258" height="614" alt="image" src="https://github.com/user-attachments/assets/b92f53ac-80ba-4b6f-a58b-322004ee7d2b" />
+<img width="1822" height="1079" alt="image" src="https://github.com/user-attachments/assets/1cb4a9ee-09b5-45c5-b16c-001b0315861a" />
+
 
 # RESULT:
 
