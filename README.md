@@ -84,42 +84,30 @@ Update rate: 1 Hz (one reading per second)</br>
 ```
 #include "ThingSpeak.h"
 #include <WiFi.h>
+#include "DHT.h"
 
-char ssid[] = "shashu";//your wifi ssid//
-char pass[] = "SHASHWATH";//your wifi pass//
+char ssid[] = "*****";//your wifi ssid//
+char pass[] = "*******";//your wifi pass//
 
-#define ldr_pin 34
-#define led_pin 2
-int ldrValue = 0;
-int lightPercentage = 0;
-const int darkValue = 4095;
-const int brightValue = 0;
+const  int out = 2;
+float temperature = 0;
+float Humidity =0;
 WiFiClient client;
+DHT dht(out,DHT11);
 
-unsigned long myChannelField =3104401;
-const int lightPercentageField = 1;
-const char* myWriteAPIKey = "WEFEQHEXUB7IVICW";
-
-
+unsigned long myChannelField = 3087421;
+const int TemperatureField = 1;
+const int HumidityField =2;
+const char* myWriteAPIKey = "I94H2S7KL1I2VT38";
 
 void setup() {
   Serial.begin(115200);
   ThingSpeak.begin(client);
-  WiFi.mode(WIFI_STA);
-  pinMode(ldr_pin,INPUT);
-  pinMode(led_pin,OUTPUT);
-
-
+  dht.begin();
+  pinMode(out,INPUT);
 }
 
 void loop() {
-  ldrValue= analogRead(ldr_pin);
-
-  lightPercentage= map(ldrValue,darkValue,brightValue,0,100);
-
-  lightPercentage=constrain(lightPercentage,0,100);
-
-  
 
   if(WiFi.status() != WL_CONNECTED)
   {
@@ -133,30 +121,27 @@ void loop() {
     }
     Serial.println("\nConnected.");
   }
-  Serial.println("Intensity");
-  Serial.println(lightPercentage);
-  Serial.println("%");
-  if(lightPercentage<50)
-  {
-    digitalWrite(led_pin,HIGH);
-  }
-  else
-  {
-    digitalWrite(led_pin,LOW);
-  }
-  delay(5000);
+  
+  float Temperature = dht.readTemperature();
+  float Humidity = dht.readHumidity();
 
-//ThingSpeak.setField(lightPercentageField,lightPercentage);
-//ThingSpeak.writeFields(myChannelField,myWriteAPIKey);
+Serial.print("Temperature: ");
+Serial.print(Temperature);
+Serial.println(" C");
 
 
-ThingSpeak.writeField(myChannelField, lightPercentageField, lightPercentage,myWriteAPIKey);
+Serial.print("Humidity: ");
+Serial.print(Humidity);
+Serial.println(" g.m-3");
+
+
+
+ThingSpeak.setField(TemperatureField,Temperature);
+ThingSpeak.setField(HumidityField,Humidity);
+ThingSpeak.writeFields(myChannelField,myWriteAPIKey);
 delay(5000);
-
-
 }
 ```
-
 
 # CIRCUIT DIAGRAM:
 <img width="379" height="464" alt="image" src="https://github.com/user-attachments/assets/70065734-60d9-418a-87f9-842ec4823671" />
