@@ -273,9 +273,13 @@ Humidity:Humidity
 
 
 # OUTPUT:
+
 <img width="1914" height="1079" alt="image" src="https://github.com/user-attachments/assets/291c1c35-3aac-40de-b8b0-78203312ef21" />
 
 ![WhatsApp Image 2025-11-11 at 11 16 51_00cf3693](https://github.com/user-attachments/assets/b2b514bf-ca2c-4a0b-b3b9-718d05bff17a)
+
+<img width="1916" height="1079" alt="image" src="https://github.com/user-attachments/assets/76efdc76-b251-4d45-a3f2-2dbbf047e9e9" />
+
 
 
 # RESULT:
