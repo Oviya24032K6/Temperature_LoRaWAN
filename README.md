@@ -268,7 +268,7 @@ Humidity:Humidity
 
 # CIRCUIT DIAGRAM:
 
-
+<img width="342" height="514" alt="image" src="https://github.com/user-attachments/assets/16d9635f-7cf9-47a3-a31f-eb0389bac36a" />
 
 
 
